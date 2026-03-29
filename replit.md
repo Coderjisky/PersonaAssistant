@@ -2,7 +2,17 @@
 
 ## Overview
 
-pnpm workspace monorepo using TypeScript. Each package manages its own dependencies.
+pnpm workspace monorepo using TypeScript. AI Assistant mobile app with Express API backend and Expo React Native frontend.
+
+## AI Assistant App Features
+- Human-like conversations powered by GPT-5.2 via Replit AI Integrations (no API key needed)
+- Streaming chat responses with real-time typing indicator
+- Hindi & English language support with selectable language preference
+- 4 conversation tones: Friendly, Professional, Romantic, Casual
+- Smart fallback responses when AI can't understand
+- Conversation history saved with AsyncStorage
+- Auto-reply feature toggle with customizable message
+- Dark theme UI inspired by ChatGPT Mobile / Claude Mobile
 
 ## Stack
 
