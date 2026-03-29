@@ -11,8 +11,23 @@ pnpm workspace monorepo using TypeScript. AI Assistant mobile app with Express A
 - 4 conversation tones: Friendly, Professional, Romantic, Casual
 - Smart fallback responses when AI can't understand
 - Conversation history saved with AsyncStorage
-- Auto-reply feature toggle with customizable message
 - Dark theme UI inspired by ChatGPT Mobile / Claude Mobile
+
+### Voice AI Calling
+- Full voice call screen with animated pulsing rings (phone-call style UI)
+- Hold-to-speak button records audio on device (expo-av)
+- Audio sent to /api/voice → gpt-audio (speech-to-speech) → returns audio response
+- AI speaks back and conversation transcript displayed in real-time
+- Works on Expo Go on physical iOS/Android devices (web shows instructions to scan QR)
+- End call button exits the screen
+
+### Social Media Auto-Reply
+- Social tab with Instagram, Facebook, and X connection cards
+- Simulated OAuth connection flow (real integration requires platform developer approval)
+- Per-platform auto-reply toggle (AI replies on user's behalf)
+- Simulated inbox tab showing demo messages with "Generate AI Reply" feature
+- Test tab: type any message and preview exactly what the AI would reply (using tone/language prefs)
+- Auto-reply uses /api/auto-reply with user profile settings (name, language, tone)
 
 ## Stack
 

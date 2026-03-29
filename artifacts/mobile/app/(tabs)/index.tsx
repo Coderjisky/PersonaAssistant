@@ -27,6 +27,11 @@ export default function HomeScreen() {
     router.push("/chat");
   }
 
+  function startVoiceCall() {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
+    router.push("/voice-call");
+  }
+
   function openConversation(id: string) {
     const conv = conversations.find(c => c.id === id);
     if (conv) {
@@ -42,9 +47,14 @@ export default function HomeScreen() {
     <View style={[styles.container, { paddingTop: topPad, paddingBottom: bottomPad }]}>
       <View style={styles.header}>
         <Text style={styles.title}>Chats</Text>
-        <Pressable style={styles.newBtn} onPress={startNewChat}>
-          <Feather name="edit" size={22} color={Colors.accent} />
-        </Pressable>
+        <View style={styles.headerActions}>
+          <Pressable style={styles.voiceCallBtn} onPress={startVoiceCall}>
+            <Feather name="phone" size={18} color={Colors.accent} />
+          </Pressable>
+          <Pressable style={styles.newBtn} onPress={startNewChat}>
+            <Feather name="edit" size={22} color={Colors.accent} />
+          </Pressable>
+        </View>
       </View>
 
       {conversations.length === 0 ? (
@@ -54,12 +64,18 @@ export default function HomeScreen() {
           </View>
           <Text style={styles.emptyTitle}>No conversations yet</Text>
           <Text style={styles.emptySubtitle}>
-            Start a new chat with your AI assistant
+            Start a new chat or call your AI assistant
           </Text>
-          <Pressable style={styles.startBtn} onPress={startNewChat}>
-            <Feather name="plus" size={16} color="#fff" />
-            <Text style={styles.startBtnText}>New Chat</Text>
-          </Pressable>
+          <View style={styles.emptyActions}>
+            <Pressable style={styles.startBtn} onPress={startNewChat}>
+              <Feather name="plus" size={16} color="#fff" />
+              <Text style={styles.startBtnText}>New Chat</Text>
+            </Pressable>
+            <Pressable style={styles.voiceBtn} onPress={startVoiceCall}>
+              <Feather name="phone" size={16} color={Colors.accent} />
+              <Text style={styles.voiceBtnText}>Voice Call</Text>
+            </Pressable>
+          </View>
         </View>
       ) : (
         <FlatList
@@ -100,6 +116,18 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_700Bold",
     color: Colors.text,
   },
+  headerActions: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+  },
+  voiceCallBtn: {
+    padding: 8,
+    borderRadius: 20,
+    backgroundColor: `${Colors.accent}15`,
+    borderWidth: 1,
+    borderColor: `${Colors.accent}30`,
+  },
   newBtn: {
     padding: 4,
   },
@@ -130,6 +158,11 @@ const styles = StyleSheet.create({
     color: Colors.textSecondary,
     textAlign: "center",
   },
+  emptyActions: {
+    flexDirection: "row",
+    gap: 12,
+    marginTop: 8,
+  },
   startBtn: {
     flexDirection: "row",
     alignItems: "center",
@@ -138,10 +171,24 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingVertical: 12,
     borderRadius: 24,
-    marginTop: 8,
   },
   startBtnText: {
     color: "#fff",
+    fontSize: 15,
+    fontFamily: "Inter_600SemiBold",
+  },
+  voiceBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    borderWidth: 1.5,
+    borderColor: `${Colors.accent}60`,
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderRadius: 24,
+  },
+  voiceBtnText: {
+    color: Colors.accent,
     fontSize: 15,
     fontFamily: "Inter_600SemiBold",
   },
